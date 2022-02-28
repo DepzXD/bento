@@ -1,8 +1,11 @@
 import React from 'react';
-import { Text } from 'react-native';
+import Cards from '../components/Cards';
 
 const Home = () => {
-  return <Text>Home</Text>;
+  return (
+    <>
+      <Cards />
+    </>
+  );
 };
-
 export default Home;
