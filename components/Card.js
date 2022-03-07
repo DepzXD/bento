@@ -1,17 +1,24 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 
-const Card = ({ imageUrl, catagory, name }) => {
-  if (name === false) {
+const Card = ({ imageUrl, catagory, name, status }) => {
+  if (status === false) {
     return (
-      <TouchableOpacity style={[styles.cardEmpty, styles.card]}>
+      <View style={[styles.cardEmpty, styles.card]}>
         <Text style={styles.addBtn}>+</Text>
         <Text style={styles.text}>{catagory}</Text>
-      </TouchableOpacity>
+      </View>
+    );
+  }
+  if (status === 'Selected') {
+    return (
+      <View style={[styles.cardEmpty, styles.card]}>
+        <Text style={[styles.addBtn, { fontSize: 18 }]}>{catagory}</Text>
+      </View>
     );
   }
   return (
-    <TouchableOpacity style={styles.card}>
+    <View style={styles.card}>
       <Image
         style={styles.image}
         source={{
@@ -20,7 +27,7 @@ const Card = ({ imageUrl, catagory, name }) => {
       />
       <View style={styles.overlay} />
       <Text style={styles.text}>{catagory}</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

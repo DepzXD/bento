@@ -1,46 +1,93 @@
-import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import React, { useState, useContext, useCallback } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import Card from './Card';
-
-const todaysPlan = [
-  {
-    name: 'nato',
-    imageUrl:
-      'https://images.pexels.com/photos/884600/pexels-photo-884600.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    catagory: 'Launch',
-  },
-  {
-    imageUrl:
-      'https://images.pexels.com/photos/2871756/pexels-photo-2871756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    catagory: 'Breakfast',
-    name: 'ramen',
-  },
-  {
-    name: false,
-    imageUrl:
-      'https://images.pexels.com/photos/3297367/pexels-photo-3297367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    catagory: 'Diner',
-  },
-];
+import AddMeals from './AddMeals';
+import { MealPlanContext, ToggleMealContext } from '../context/mealPlan';
 
 const Cards = () => {
+  const [toggleMeals, setToggleMeals] = useState({
+    toggle: true,
+    catagory: 'NaN',
+  });
+
+  const [mealPlan, setMealPlan] = useContext(MealPlanContext);
+
+  const handleSelectMeals = useCallback(
+    (index) => {
+      if (toggleMeals.toggle) {
+        return;
+      }
+      const tempList = [...mealPlan];
+      tempList[index].status = 'Selected';
+      setMealPlan(tempList);
+    },
+    [mealPlan, setMealPlan, toggleMeals.toggle],
+  );
+
+  const handleDeselactMeals = useCallback(
+    (name, index) => {
+      if (toggleMeals.toggle) {
+        return;
+      }
+      const tempList = [...mealPlan];
+      if (name !== false) {
+        tempList[index].status = true;
+      } else {
+        tempList[index].status = false;
+      }
+      setMealPlan(tempList);
+    },
+    [mealPlan, setMealPlan, toggleMeals.toggle],
+  );
   return (
     <>
       <View>
-        <Text style={styles.heading}>Today's Meal</Text>
-        <FlatList
-          horizontal={true}
-          style={styles.cards}
-          data={todaysPlan}
-          keyExtractor={(item) => item.catagory}
-          renderItem={({ item }) => (
-            <Card
-              name={item.name}
-              imageUrl={item.imageUrl}
-              catagory={item.catagory}
-            />
-          )}
-        />
+        <ToggleMealContext.Provider value={[toggleMeals, setToggleMeals]}>
+          <Text style={styles.heading}>Today's Meal</Text>
+          <FlatList
+            horizontal={true}
+            style={styles.cards}
+            data={mealPlan}
+            keyExtractor={(item) => item.catagory}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                onPress={() => {
+                  if (
+                    toggleMeals.toggle === true &&
+                    toggleMeals.catagory === 'NaN'
+                  ) {
+                    setToggleMeals({ toggle: false, catagory: item.catagory });
+                    handleSelectMeals(index);
+                  }
+                  if (
+                    toggleMeals.toggle === false &&
+                    toggleMeals.catagory === item.catagory
+                  ) {
+                    setToggleMeals({ toggle: true, catagory: 'NaN' });
+                    handleDeselactMeals(item.name, index);
+                  }
+                }}
+                style={{
+                  order: `${toggleMeals.catagory === item.catagory && 0}`,
+                }}
+              >
+                <Card
+                  name={item.name}
+                  imageUrl={item.imageUrl}
+                  catagory={item.catagory}
+                  status={item.status}
+                />
+              </TouchableOpacity>
+            )}
+          />
+          <AddMeals style={styles.addMeals} />
+        </ToggleMealContext.Provider>
       </View>
     </>
   );
