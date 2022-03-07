@@ -13,7 +13,7 @@ const Card = ({ imageUrl, catagory, name }) => {
   return (
     <TouchableOpacity style={styles.card}>
       <Image
-        style={{ flex: 1 }}
+        style={styles.image}
         source={{
           uri: imageUrl,
         }}
@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     flex: 1,
     fontSize: 50,
+  },
+  image: {
+    flex: 1,
   },
 });
 

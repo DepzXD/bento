@@ -26,7 +26,7 @@ const todaysPlan = [
 const Cards = () => {
   return (
     <>
-      <View style={styles.container}>
+      <View>
         <Text style={styles.heading}>Today's Meal</Text>
         <FlatList
           horizontal={true}
@@ -47,10 +47,8 @@ const Cards = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-  },
   heading: {
+    marginBottom: 5,
     color: '#fff',
     fontFamily: 'Roboto',
     fontSize: 25,
