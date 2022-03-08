@@ -20,21 +20,15 @@ const Cards = () => {
 
   const handleSelectMeals = useCallback(
     (index) => {
-      if (toggleMeals.toggle) {
-        return;
-      }
       const tempList = [...mealPlan];
       tempList[index].status = 'Selected';
       setMealPlan(tempList);
     },
-    [mealPlan, setMealPlan, toggleMeals.toggle],
+    [mealPlan, setMealPlan],
   );
 
   const handleDeselactMeals = useCallback(
     (name, index) => {
-      if (toggleMeals.toggle) {
-        return;
-      }
       const tempList = [...mealPlan];
       if (name !== false) {
         tempList[index].status = true;
@@ -43,11 +37,11 @@ const Cards = () => {
       }
       setMealPlan(tempList);
     },
-    [mealPlan, setMealPlan, toggleMeals.toggle],
+    [mealPlan, setMealPlan],
   );
   return (
     <>
-      <View>
+      <View style={{ marginBottom: 20 }}>
         <ToggleMealContext.Provider value={[toggleMeals, setToggleMeals]}>
           <Text style={styles.heading}>Today's Meal</Text>
           <FlatList
@@ -95,7 +89,7 @@ const Cards = () => {
 
 const styles = StyleSheet.create({
   heading: {
-    marginBottom: 5,
+    marginBottom: 8,
     color: '#fff',
     fontFamily: 'Roboto',
     fontSize: 25,

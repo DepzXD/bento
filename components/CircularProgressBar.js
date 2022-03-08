@@ -22,19 +22,19 @@ const CircularProgressBar = ({
   const animatedValue = useRef(new Animated.Value(0)).current;
   const halfCircle = radius + strokeWidth;
   const circleCircumfrance = 2 * Math.PI * radius;
-  const animation = (toValue) => {
-    return Animated.timing(animatedValue, {
-      delay,
-      toValue,
-      duration,
-      useNativeDriver: true,
-    }).start();
-  };
 
   percentage = state === 'NaN' ? 100 : percentage;
-  // color = state === 'NaN' ? '#27323A' : color;
 
   React.useEffect(() => {
+    const animation = (toValue) => {
+      return Animated.timing(animatedValue, {
+        delay,
+        toValue,
+        duration,
+        useNativeDriver: true,
+      }).start();
+    };
+
     animation(percentage);
     animatedValue.addListener((v) => {
       if (inputRef?.current) {
@@ -43,6 +43,7 @@ const CircularProgressBar = ({
           text: `${Math.round(v.value)}`,
         });
       }
+
       if (circleRef?.current) {
         const maxPer = (100 * v.value) / max;
         const strokeDashoffset =
@@ -56,7 +57,7 @@ const CircularProgressBar = ({
     return () => {
       animatedValue.removeAllListeners();
     };
-  }, [max, percentage]);
+  }, [animatedValue, circleCircumfrance, delay, duration, max, percentage]);
 
   return (
     <View>
