@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { darkScheme } from './components/styles/Colors';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Progress from './screens/Progress';
@@ -15,11 +16,11 @@ export default function App() {
       <Tab.Navigator
         screenOptions={() => ({
           tabBarStyle: {
-            backgroundColor: '#435055',
+            backgroundColor: darkScheme.SecondaryBackgound,
             borderTopColor: 'transparent',
           },
-          tabBarActiveTintColor: '#A3F7BF',
-          tabBarInactiveTintColor: '#fff',
+          tabBarActiveTintColor: darkScheme.Secondary,
+          tabBarInactiveTintColor: darkScheme.Primary,
           tabBarShowLabel: false,
         })}
       >

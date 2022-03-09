@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { typographyStyles } from '../components/styles/Typography';
+import { darkScheme } from '../components/styles/Colors';
 import { MealPlanContext } from '../context/mealPlan';
 import WeeklyProgress from '../components/WeeklyProgress';
 import Cards from '../components/Cards';
@@ -26,8 +28,8 @@ const Header = ({ navigation, user = 'User' }) => {
   return (
     <View style={styles.headerStyles}>
       <View>
-        <Text style={styles.heading}>Hi {user}</Text>
-        <Text style={styles.tagLine}>Welcome back!</Text>
+        <Text style={typographyStyles.heading1}>Hi {user}</Text>
+        <Text style={typographyStyles.text}>Welcome back!</Text>
       </View>
       <TouchableOpacity
         onPress={() => navigation.navigate('Profile')}
@@ -57,7 +59,7 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#27323A',
+    backgroundColor: darkScheme.PrimaryBackgound,
     flex: 1,
     padding: 20,
     paddingBottom: 0,
@@ -68,20 +70,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 15,
   },
-  heading: {
-    fontSize: 34,
-    letterSpacing: 0.25,
-    color: '#fff',
-  },
-  tagLine: {
-    fontSize: 16,
-    letterSpacing: 0.5,
-    color: '#C4C4C4',
-  },
   profile: {
+    borderColor: darkScheme.SecondaryBackgound,
     borderRadius: 80,
     borderWidth: 3.3,
-    borderColor: '#435055',
     height: 70,
     width: 70,
   },

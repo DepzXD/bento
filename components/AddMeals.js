@@ -6,8 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Card from './Card';
 import { MealPlanContext, ToggleMealContext } from '../context/mealPlan';
+import Card from './Card';
+import { typographyStyles } from './styles/Typography';
 
 const meals = [
   {
@@ -44,7 +45,9 @@ const AddMeals = ({}) => {
 
   return (
     <View style={{ display: `${toggleMeals.toggle ? 'none' : 'flex'}` }}>
-      <Text style={styles.text}>{toggleMeals.catagory} Recommendations </Text>
+      <Text style={typographyStyles.textSmall}>
+        {toggleMeals.catagory} Recommendations
+      </Text>
       <FlatList
         horizontal={true}
         style={styles.cards}
@@ -67,19 +70,8 @@ const AddMeals = ({}) => {
 };
 
 const styles = StyleSheet.create({
-  heading: {
-    marginBottom: 5,
-    color: '#fff',
-    fontFamily: 'Roboto',
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
   cards: {
     flexDirection: 'row',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 14,
   },
 });
 

@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import Svg, { Circle, G } from 'react-native-svg';
 import { View, Animated, TextInput, StyleSheet } from 'react-native';
+import { typographyStyles } from './styles/Typography';
+import { darkScheme } from './styles/Colors';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedInput = Animated.createAnimatedComponent(TextInput);
@@ -10,8 +12,8 @@ const CircularProgressBar = ({
   radius = 55,
   strokeWidth = 13,
   duration = 500,
-  color = '#A3F7BF',
-  strokeColor = '#27323A',
+  color = darkScheme.Secondary,
+  strokeColor = darkScheme.PrimaryBackgound,
   delay = 0,
   textColor,
   max = 100,
@@ -97,8 +99,9 @@ const CircularProgressBar = ({
         multiline={true}
         style={[
           StyleSheet.absoluteFillObject,
-          { fontSize: 18, color: textColor ?? color },
-          { fontWeight: 'bold', fontFamily: 'Roboto', textAlign: 'center' },
+          typographyStyles.text,
+          typographyStyles.bold,
+          { color: textColor ?? color, textAlign: 'center' },
         ]}
       />
     </View>

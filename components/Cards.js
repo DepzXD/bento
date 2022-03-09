@@ -9,7 +9,7 @@ import {
 import Card from './Card';
 import AddMeals from './AddMeals';
 import { MealPlanContext, ToggleMealContext } from '../context/mealPlan';
-
+import { typographyStyles } from './styles/Typography';
 const Cards = () => {
   const [toggleMeals, setToggleMeals] = useState({
     toggle: true,
@@ -43,7 +43,9 @@ const Cards = () => {
     <>
       <View style={{ marginBottom: 20 }}>
         <ToggleMealContext.Provider value={[toggleMeals, setToggleMeals]}>
-          <Text style={styles.heading}>Today's Meal</Text>
+          <Text style={[typographyStyles.heading2, typographyStyles.bold]}>
+            Today's Meal
+          </Text>
           <FlatList
             horizontal={true}
             style={styles.cards}
@@ -88,13 +90,6 @@ const Cards = () => {
 };
 
 const styles = StyleSheet.create({
-  heading: {
-    marginBottom: 8,
-    color: '#fff',
-    fontFamily: 'Roboto',
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
   cards: {
     flexDirection: 'row',
   },

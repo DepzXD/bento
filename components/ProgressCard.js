@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CircularProgressBar from './CircularProgressBar';
-
+import { typographyStyles } from './styles/Typography';
+import { darkScheme } from './styles/Colors';
 const ProgressCard = (props) => {
   return (
     <>
@@ -16,15 +17,14 @@ const ProgressCard = (props) => {
 const styles = StyleSheet.create({
   cardText: {
     padding: 8,
-    color: '#fff',
     textAlign: 'center',
-    fontSize: 14,
+    ...typographyStyles.textSmall,
   },
   card: {
     width: 145,
     height: 165,
     alignItems: 'center',
-    backgroundColor: '#435055',
+    backgroundColor: darkScheme.SecondaryBackgound,
     marginHorizontal: 10,
     borderRadius: 8,
     marginVertical: 10,
